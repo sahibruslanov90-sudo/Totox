@@ -1,0 +1,4 @@
+import 'package:flutter/material.dart';
+import '../services/match_service.dart';
+import 'match_detail_screen.dart';
+class MatchesScreen extends StatelessWidget { const MatchesScreen({super.key}); @override Widget build(BuildContext context)=>SafeArea(child:ListView(padding:const EdgeInsets.all(20),children:[const Text('Maçlar',style:TextStyle(fontSize:26,fontWeight:FontWeight.w900)),const SizedBox(height:5),const Text('Haftanın programı',style:TextStyle(color:Colors.white54)),const SizedBox(height:18),...MatchService.matches.map((m)=>Card(margin:const EdgeInsets.only(bottom:8),child:ListTile(onTap:()=>Navigator.push(context,MaterialPageRoute(builder:(_)=>MatchDetailScreen(match:m))),leading:Text('#${m.number}',style:const TextStyle(color:Colors.greenAccent,fontWeight:FontWeight.bold)),title:Text('${m.home} - ${m.away}'),subtitle:Text('${m.league} • ${m.date} ${m.time}'),trailing:const Icon(Icons.chevron_right)))])); }

@@ -1,0 +1,4 @@
+import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
+class TotoLogo extends StatelessWidget { final double size; const TotoLogo({super.key,this.size=42}); @override Widget build(BuildContext context)=>Container(width:size,height:size,decoration:BoxDecoration(color:AppTheme.green,borderRadius:BorderRadius.circular(size*.25)),child:Center(child:Text('TX',style:TextStyle(color:Colors.black,fontWeight:FontWeight.w900,fontSize:size*.32)))); }
+class TeamLogo extends StatelessWidget { final String name; const TeamLogo({super.key,required this.name}); @override Widget build(BuildContext context){ final initials=name.split(' ').where((e)=>e.isNotEmpty).take(2).map((e)=>e[0]).join(); return CircleAvatar(radius:20,backgroundColor:Colors.white.withOpacity(.08),child:Text(initials,style:const TextStyle(fontWeight:FontWeight.bold,color:Colors.white)));}}

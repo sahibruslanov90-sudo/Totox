@@ -1,0 +1,10 @@
+import 'package:flutter/material.dart';
+import '../services/match_service.dart';
+import '../widgets/logo.dart';
+import '../widgets/match_card.dart';
+import 'match_detail_screen.dart';
+import 'coupon_screen.dart';
+class HomeScreen extends StatefulWidget { const HomeScreen({super.key}); @override State<HomeScreen> createState()=>_HomeScreenState(); }
+class _HomeScreenState extends State<HomeScreen>{ final Map<String,String> selections={};
+ void select(int n,String v){setState(()=>selections[n.toString()]=v);}
+ @override Widget build(BuildContext context)=>SafeArea(child:CustomScrollView(slivers:[SliverToBoxAdapter(child:Padding(padding:const EdgeInsets.fromLTRB(20,20,20,10),child:Row(children:[const TotoLogo(),const SizedBox(width:12),const Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text('TotoX',style:TextStyle(fontSize:25,fontWeight:FontWeight.w900)),Text('Kuponunu kur. İstatistiğini gör.',style:TextStyle(color:Colors.white54,fontSize:11))]),const Spacer(),Icon(Icons.notifications_none_rounded)]))),SliverToBoxAdapter(child:Padding(padding:const EdgeInsets.fromLTRB(20,15,20,12),child:Container(padding:const EdgeInsets.all(18),decoration:BoxDecoration(gradient:LinearGradient(colors:[Color(0xFF143F25),Color(0xFF0E2418)]),borderRadius:BorderRadius.circular(22)),child:Row(children:[const Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text('Bu Haftanın Kuponu',style:TextStyle(fontSize:19,fontWeight:FontWeight.bold)),SizedBox(height:4),Text('15 maç • Seçimlerini yap ve kuponunu oluştur.',style:TextStyle(color:Colors.white70,fontSize:12))])),FilledButton(onPressed:()=>Navigator.push(context,MaterialPageRoute(builder:(_)=>const CouponScreen())),child:const Text('Kupon'))])))),SliverPadding(padding:const EdgeInsets.fromLTRB(16,4,16,20),sliver:SliverList(delegate:SliverChildBuilderDelegate((context,i){final m=MatchService.matches[i]; return Padding(padding:const EdgeInsets.only(bottom:10),child:MatchCard(match:m,selections:selections,onTap:()=>Navigator.push(context,MaterialPageRoute(builder:(_)=>MatchDetailScreen(match:m)))));},childCount:MatchService.matches.length)))])); }
